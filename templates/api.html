@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<section class="text-gray-600 body-font">
+
+
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-wrap -mx-4 -my-8">
+      <div class="py-8 px-4 lg:w-1/3">
+        <div class="h-full flex items-start">
+          <div class="flex-grow pl-6">
+{% for symbol in symbols|slice:"10" %}
+{% for price in prices|slice:":10" %}
+            <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">ORDEM</h2>
+            <h1 class="title-font text-xl font-medium text-gray-900 mb-3">Simbolo: {{ symbols.0 }}</h1>
+            <p class="leading-relaxed mb-5">Preço: {{ prices.0 }}</p>
+{% endfor %}
+{% endfor %}
+
+          </div>
+        </div>
+      </div>
+</section>
+
+{% endblock content %}

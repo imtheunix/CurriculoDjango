@@ -1,0 +1,10 @@
+#s2 {
+    display: none;
+  }
+
+.visibility {
+  display: block !important;
+}
+#prev {
+  text-align: right;
+}
