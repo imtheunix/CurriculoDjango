@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.http import HttpResponse
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
+from .models import User
+from .forms import CustomUserCreationForm
+from django.views import generic
 from binance import Client
 from binance.enums import *
 from django.template.defaulttags import register
@@ -24,17 +28,16 @@ api_secret = 'OFrd6x7hBSAxxIP0liVDpfv6v0OBbCKtoaRTWqn8Te3y7gjv7s7Rz8RZVYT9B5A5'
 socket = f'wss://stream.binance.com:9443/ws/{cc}@kline_{interval}'
 
 
+class SignupView(generic.CreateView):
+    template_name = "registration/signup.html"
+    form_class = CustomUserCreationForm
+
+    def get_success_url(self):
+        return reverse("login")
+
 class Home_page(TemplateView):
     template_name = "landing.html"
 
-
-@register.filter(name='lookup')
-def lookup(value, arg):
-    return value[arg]
-    
-@register.filter
-def intcomma(value):
-    return value + 1
 
 def Api(request):
     client = Client(api_key, api_secret)
