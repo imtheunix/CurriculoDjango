@@ -1,10 +1,14 @@
 #s2 {
-    display: none;
-  }
+  display: none;
+}
 
 .visibility {
   display: block !important;
 }
 #prev {
   text-align: right;
+}
+
+h2 {
+  color: aqua;
 }
