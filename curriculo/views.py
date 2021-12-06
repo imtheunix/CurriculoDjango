@@ -123,7 +123,7 @@ def send(request):
         return HttpResponse('Mensagem enviada com sucesso')
 
 def apagar(request, username):
-    Message.objects.filter(user=username).delete()
+    Message.objects.filter(room='1').delete()
 
     return HttpResponse('Mensagens de usuario apagadas')
 
