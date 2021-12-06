@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, render_to_response
+from django.shortcuts import render, reverse
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
