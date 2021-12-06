@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
-from curriculo.views import Home_page, Api, Robo, SignupView
+from curriculo.views import Home_page, Api, Robo, SignupView, room, checkview, send, getMessages, home, apagar
 from django.contrib.auth.views import LoginView, LogoutView
 from django.conf.urls.static import static
 from django.views.static import serve
@@ -31,6 +31,12 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', SignupView.as_view(), name='signup'),
+    path('<str:room>/', room, name='room'),
+    path('checkview', checkview, name='checkview'),
+    path('send', send, name='send'),
+    path('getMessages/<str:room>/', getMessages, name='getMessages'),
+    path('chat/', home, name='chatenter'),
+    path('<str:username>/chat/', apagar, name='apagar'),
     url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ]

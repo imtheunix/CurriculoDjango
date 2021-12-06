@@ -1,8 +1,8 @@
-from django.shortcuts import render, reverse
-from django.http import HttpResponse
+from django.shortcuts import render, reverse, render_to_response
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
-from .models import User
+from .models import User, Room, Message
 from .forms import CustomUserCreationForm
 from django.views import generic
 from binance import Client
@@ -35,8 +35,13 @@ class SignupView(generic.CreateView):
     def get_success_url(self):
         return reverse("login")
 
+
 class Home_page(TemplateView):
     template_name = "landing.html"
+
+
+def home(request):
+    return render(request, 'home.html')
 
 
 def Api(request):
@@ -79,4 +84,51 @@ def Average(lst):
         return sum(lst) / len(lst)
 
 
-    
+def room(request, room):
+    if request.user.is_authenticated:
+        username = request.user.username
+        room = 'publico'
+        if Room.objects.exists():
+            room_details = Room.objects.get(name=room)
+        else:
+            Room.objects.create(name='publico')
+        return render(request, 'room.html', {
+            'username': username,
+            'room': room,
+            'room_details': room_details
+        })
+    else:
+        return render(request,'registration/signup.html')
+
+def checkview(request):
+    room = request.POST['room_name']
+    username = request.user.username
+
+    if Room.objects.filter(name=room).exists():
+        return redirect('/'+room+'/?username='+username)
+    else:
+        new_room = Room.objects.create(name=room)
+        new_room.save()
+        return redirect('/'+room+'/?username='+username)
+
+def send(request):
+    message = request.POST['message']
+    username = request.user.username
+    room_id = request.POST['room_id']
+    if message == '':
+        self.add_error('message', 'Coloque algo na mensagem')
+    else:
+        new_message = Message.objects.create(value=message, user=username, room=room_id)
+        new_message.save()
+        return HttpResponse('Mensagem enviada com sucesso')
+
+def apagar(request, username):
+    Message.objects.filter(user=username).delete()
+
+    return HttpResponse('Mensagens de usuario apagadas')
+
+def getMessages(request, room):
+    room_details = Room.objects.get(name=room)
+
+    messages = Message.objects.filter(room=room_details.id)
+    return JsonResponse({"messages":list(messages.values())})
