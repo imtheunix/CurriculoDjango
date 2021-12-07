@@ -21,6 +21,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf.urls import url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -42,3 +43,4 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT) 
+urlpatterns += staticfiles_urlpatterns()

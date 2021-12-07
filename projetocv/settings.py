@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import mimetypes
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,3 +148,5 @@ LOGIN_REDIRECT_URL = "/chat/"
 LOGOUT_REDIRECT_URL = "/"
 
 AUTH_USER_MODEL = 'curriculo.User'
+
+mimetypes.add_type("text/css", ".css", True)
