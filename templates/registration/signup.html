@@ -6,7 +6,7 @@
   <div class="mx-auto items-center align-center">
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Autentique sua visita
+        Please authenticate
       </h2>
     </div>
     <form class="mt-8 space-y-6" action="#" method="POST">
@@ -14,16 +14,16 @@
       <div class="rounded-md shadow-sm">
       {% csrf_token %}
         <div class="mb-2">
-          <label for="email-address" class="sr-only">Usuário</label>
-          <input id="email-address" name="username" type="username" autocomplete="email" required class="appearance-none rounded-none relative w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Usuário" autofocus>
+          <label for="email-address" class="sr-only">Username</label>
+          <input id="email-address" name="username" type="username" autocomplete="email" required class="appearance-none rounded-none relative w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Username" autofocus>
         </div>
         <div class="mb-2">
-          <label for="password1" class="sr-only">Senha</label>
-          <input id="password1" name="password1" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Senha" autofocus>
+          <label for="password1" class="sr-only">Password</label>
+          <input id="password1" name="password1" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Password" autofocus>
         </div>
         <div class="mb-2">
-          <label for="password2" class="sr-only">Confirmar</label>
-          <input id="password2" name="password2" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Confirmar senha">
+          <label for="password2" class="sr-only">Confirm your password</label>
+          <input id="password2" name="password2" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Confirm your password">
         </div>
       </div>
       <div>
@@ -34,20 +34,20 @@
               <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
             </svg>
           </span>
-          Criar
+          Create
         </button>
-        <a href="{% url 'login' %}" class="text-indigo-400 hover:text-indigo-600 no-underline ...">Já tenho uma conta...</a>
+        <a href="{% url 'login' %}" class="text-indigo-400 hover:text-indigo-600 no-underline ...">Already have an account..</a>
       </div>
-
+   </form>
+  </div>
 {% if form.errors %}
 
-	<div id="errors">
-		<div class="inner">
-			<p>Corrija os seguintes erros</p><br>
+	<div class="absolute bottom-10 left-10 pt-24" id="errors">
+		<div class="inner pt-24">
 			{{ form.non_field_errors }}
-			<ul>
+			<ul class="list-disc">
 				{% for field in form %}
-					{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+					{% if field.errors %} {% for error in field.errors %}<li><p class="text-pink-600">{{ error|striptags }}</p></li>{% endfor %}{% endif %}
 				{% endfor %}
 			</ul>
 		</div>
@@ -55,13 +55,12 @@
 
 {% endif %}
 
-    </form>
-  </div>
+   
 </div>
 
 <script>
   if (window.location.pathname === '/chat/'){
-    alert("Você precisa de uma conta para usar o chat");
+    alert("You must sign in first.");
     window.location.replace("/signup/");
 }
 </script>

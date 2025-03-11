@@ -116,11 +116,11 @@ def send(request):
     username = request.user.username
     room_id = request.POST['room_id']
     if message == '':
-        self.add_error('message', 'Coloque algo na mensagem')
+        self.add_error('message', 'Put something in the message.')
     else:
         new_message = Message.objects.create(value=message, user=username, room=room_id)
         new_message.save()
-        return HttpResponse('Mensagem enviada com sucesso')
+        return HttpResponse('Message sent.')
 
 def apagar(request, username):
     Message.objects.filter(room='1').delete()

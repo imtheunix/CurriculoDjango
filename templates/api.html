@@ -6,7 +6,7 @@
 
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-col items-center text-center justify-center">
-      <h2 class="font-medium title-font text-gray-900 text-lg">Recarregando em: <span id="time">05</span></h2>
+      <h2 class="font-medium title-font text-gray-900 text-lg">Refreshing in: <span id="time">05</span></h2>
       <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
     </div>
     <div class="flex flex-wrap -m-4 mt-6">
@@ -16,8 +16,8 @@
       <div class="p-4 lg:w-1/4 md:w-1/1">
         <div class="h-full flex flex-col items-center text-center">
           <div class="w-full">
-            <h2 class="title-font font-medium text-lg text-gray-900">Simbolo: {{ symbols|index:forloop.counter0 }}</h2>
-            <p class="mb-4">Preço: {{ prices|index:forloop.counter0 }}</p>
+            <h2 class="title-font font-medium text-lg text-gray-900">Pair: {{ symbols|index:forloop.counter0 }}</h2>
+            <p class="mb-4">Price: {{ prices|index:forloop.counter0 }}</p>
           </div>
         </div>
       </div>
