@@ -60,7 +60,7 @@ def Api(request):
 
 def Robo(request):
     client = Client(api_key, api_secret)
-    candles = client.get_klines(symbol='NANOUSDT', interval=Client.KLINE_INTERVAL_1MINUTE)
+    candles = client.get_klines(symbol='XNOUSDT', interval=Client.KLINE_INTERVAL_1MINUTE)
     c1 = candles[1]
     c2 = candles[2]
     c3 = candles[3]
